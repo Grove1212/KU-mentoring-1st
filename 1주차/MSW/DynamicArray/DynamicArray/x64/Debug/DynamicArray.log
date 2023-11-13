@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\start\Documents\Baekjoon\DynamicArray\DynamicArray\main.cpp(52): warning C4715: 'DynamicArray<int>::pop_back': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  DynamicArray.vcxproj -> C:\Users\start\Documents\Baekjoon\DynamicArray\x64\Debug\DynamicArray.exe
