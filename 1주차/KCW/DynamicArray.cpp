@@ -62,7 +62,7 @@ void DynamicArray::insert(int idx, char* c) {
 			j++;
 		}
 		delete p;
-		p = tmp;	
+		p = tmp;
 	}
 	index += strlen(c);
 	int j = 0;
@@ -80,8 +80,8 @@ char DynamicArray::at(int idx) {
 int DynamicArray::size() { return arrSize; }
 void DynamicArray::clear() {
 	index = -1;
-	arrSize = 1; 
-	delete p; 
+	arrSize = 1;
+	delete p;
 	p = NULL;
 }
 void DynamicArray::print() {
@@ -89,10 +89,12 @@ void DynamicArray::print() {
 		cout << "p[ " << i << " ] = " << p[i] << endl;
 }
 
+
+
 int main() {
 	DynamicArray arr;
-	char a[] = "abc";
-	char b[] = "def";
+	string a("abc");
+	string b("def");
 	arr.push_back(a);
 	arr.push_back(b);
 	arr.print();
