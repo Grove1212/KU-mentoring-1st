@@ -72,7 +72,9 @@ void DynamicArray::insert(int idx, char* c) {
 	}
 }
 void DynamicArray::Delete(int idx) {
-	p[idx] = ' ';
+	for (int i = index - idx + 1; i < index; i++) {
+		p[i] = p[i + 1];
+	}
 }
 char DynamicArray::at(int idx) {
 	return p[idx];
@@ -93,8 +95,8 @@ void DynamicArray::print() {
 
 int main() {
 	DynamicArray arr;
-	string a("abc");
-	string b("def");
+	char a[] = "abc";
+	char b[] = "def";
 	arr.push_back(a);
 	arr.push_back(b);
 	arr.print();
