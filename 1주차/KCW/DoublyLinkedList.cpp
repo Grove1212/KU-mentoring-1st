@@ -8,8 +8,8 @@ struct Node {
 	string data;
 	struct Node(string s = NULL) {
 		data = s;
-		prev = nullptr;
-		next = nullptr;
+		prev = nullptr; // 이전노드
+		next = nullptr; // 다음노드
 	}
 };
 
@@ -39,57 +39,50 @@ void DoublyLinkedList::debug() {
 	}
 }
 DoublyLinkedList::DoublyLinkedList() {
-	head = nullptr;// 더미 노드
+	head = new Node(" ");
 	tail = new Node(" ");
+	head->next = tail;
+	tail->prev = head; //head와 tail의 포인터가 서로를 향한다.
 }
 void DoublyLinkedList::push_back(string s) {
 	Node* a = new Node(s);
-	if (head == nullptr)
-		head = a;
-	if (tail == nullptr)
-		tail = a;
-	else {
-		tail->next = a;// 이전노드의 포인터는 새로운 노드를 가리킴
-		a->prev = tail;
-		tail = a; // tail은 이제 새로운 노드를 가리킴
-	}
+	Node* tmp = tail->prev;
+	tail->prev->next = a; // tail의 이전노드와 a의 prev를 연결
+	tail->prev = a;
+	a->prev = tmp;
+	a->next = tail;
 }
 void DoublyLinkedList::push_front(string s) {
 	Node* a = new Node(s);
-	if (head == nullptr)
-		head = a;
-	if (tail == nullptr)
-		tail = a;
-	else {
-		head->prev = a;
-		a->next = head; //새로운 노드의 포인터는 head를 가리킴
-		head = a; // head는 새로운 노드의 주소
-	}
+	Node* tmp = head->next;
+	head->next->prev = a;
+	head->next = a;
+	a->prev = head; // head의 다음노드와 a의 prev를 연결
+	a->next = tmp;
 }
 void DoublyLinkedList::insert(int idx, string s) {
-	int i = 1;
 	Node* ptr = head;
-	while (i == (idx - 1)) {
+	for (int i = 0; i < idx; i++) {
 		ptr = ptr->next;
-		i++;
 	}
 	Node* a = new Node(s);
 	a->next = ptr->next;
 	ptr->next = a;
+	ptr->next->prev = a;
+	a->prev = ptr;
 }
 void DoublyLinkedList::insert(int idx, string s[], int size) {
-	int i = 1;
 	Node* ptr = head;
-	while (i == (idx - 1)) {
+	for(int i = 0; i < idx; i++) {
 		ptr = ptr->next;
-		i++;
 	}
 
 	for (int i = 0; i < size; i++) {
 		Node* a = new Node(s[i]);
 		a->next = ptr->next;
 		ptr->next = a;
-		ptr = a;
+		ptr->next->prev = a;
+		a->prev = ptr;
 	}
 }
 string DoublyLinkedList::front() {
@@ -99,21 +92,17 @@ string DoublyLinkedList::back() {
 	return tail->data;
 }
 void DoublyLinkedList::Delete(int idx) {
-	int i = 1;
 	Node* ptr1 = head;
-	while (i == idx - 1) {
+	for (int i = 0; i < idx; i++) { // idx 위치의 노드를 찾음
 		ptr1 = ptr1->next;
-		i++;
 	}
 	Node* ptr2 = ptr1->next;
 	ptr1->next = ptr2->next;
 }
 void DoublyLinkedList::Delete(int idx, int size) {
-	int i = 1;
 	Node* ptr1 = head;
-	while (i == idx - 1) { // idx 위치의 노드를 찾음
+	for(int i = 0; i <idx; i++) { // idx 위치의 노드를 찾음
 		ptr1 = ptr1->next;
-		i++;
 	}
 	Node* ptr2 = ptr1;
 	for (int i = 0; i < size; i++) {
@@ -146,7 +135,7 @@ int main() {
 	a.push_back(e);
 
 	string hi[] = { "a","b","c","d" };
-	a.insert(2, hi,4);
+	a.insert(2, hi, 4);
 	a.debug();
 
 	a.Delete(2, 4);
