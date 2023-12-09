@@ -19,6 +19,8 @@ void divide(int N) {
 	for (int i = 0; i < N; i += 2) {//row
 		for (int j = 0; j < N; j += 2) {//col
 			map[j/2][i/2] = second_big(j, i);
+			// map의 n/2 * n/2 공간을 활용하여 값을 넣어줌.
+			//그래서 인덱스가 j/2가 되어야함.
 		}
 	}
 	if (N > 1) {

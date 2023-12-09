@@ -5,6 +5,7 @@
 //시간초과가 뜰 때 printf, scanf를 사용하면 더 빠르게 결과값 출력 가능
 using namespace std;
 
+
 int result[3]; // 전역변수는 0으로 초기화
 int map[2200][2200];
 
@@ -39,20 +40,23 @@ void divide(int row, int col, int num) {
 
 
 int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(0);
+	cout.tie(0);
 
 	int N;
-	scanf("%d", &N);
+	cin >> N;
 
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < N; j++) {
 
 			int input;
-			scanf("%d", &input);
+			cin >> input;
 			input++; // -1,0,1 을 각각 0,1,2로 표현		
 			map[i][j] = input;
 		}
 	}
 	divide(0, 0, N);
-	printf("%d\n%d\n%d", result[0], result[1], result[2]);
+	cout << result[0] << endl << result[1] << endl << result[2];
 
 }
